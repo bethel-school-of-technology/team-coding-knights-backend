@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codeknights.ProEstimates1.models.Quotes;
 
+
+
 @Controller
 @RequestMapping({"/","/quotes"})
 public class QuotesController {
+	
 	
 	@Value("${spring.datasource.url}")
 	private String url;
@@ -38,7 +41,7 @@ public class QuotesController {
 		try {
 		con = DriverManager.getConnection(url, username, password);
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Quotes");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM quotes");
 		
 		while (rs.next()) {
 
