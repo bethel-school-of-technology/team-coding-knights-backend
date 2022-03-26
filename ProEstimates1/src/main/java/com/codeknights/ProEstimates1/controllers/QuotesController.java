@@ -45,10 +45,10 @@ public class QuotesController {
 		
 		while (rs.next()) {
 
-		    // create a new User object
+		    // create a new Quotes object
 		    Quotes newQuotes = new Quotes();
 
-		    // get the values from each column of the current row and add them to the new Actor
+		    // get the values from each column of the current row and add them to the new Quotes
 		    newQuotes.setUser_id(rs.getInt("user_id"));
 			newQuotes.setQuote_id(rs.getInt("quote_id"));
 			newQuotes.setMaterial_name(rs.getString("material_name"));
@@ -56,7 +56,7 @@ public class QuotesController {
 			newQuotes.setQuote_price(rs.getInt("quote_price"));
 			newQuotes.setQuote_material(rs.getString("quote_material"));
 			newQuotes.setUser_comments(rs.getString("user_comments"));
-		    // add the new actor to the actors list
+		    // add the new quotes to the quotes list
 		    quotes.add(newQuotes);
 			}
 		} catch (SQLException e) {

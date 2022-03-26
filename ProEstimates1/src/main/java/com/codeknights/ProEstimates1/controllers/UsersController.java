@@ -1,7 +1,5 @@
 package com.codeknights.ProEstimates1.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,49 +9,60 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.codeknights.ProEstimates1.models.User;
 import com.codeknights.ProEstimates1.repositories.UserRepository;
 
 @RestController
 @Controller
-@RequestMapping({"/user"})
 public class UsersController {
 	
 	@Autowired
 	UserRepository dao;
 	
-	@GetMapping("/user")
-	public List<User> getUsers() {
-		List<User> foundUsers = dao.findAll();
-		return foundUsers;
-	}
 	
-	@PostMapping("/user")
+	@GetMapping("/user/")
+    public ResponseEntity<User> getUser(@PathVariable(value="user_email") String user_email) {
+        User foundUser = dao.findByUsername(user_email);
+
+        if(foundUser == null) {
+            return ResponseEntity.notFound().header("User","Nothing found with that user_email").build();
+        }
+        return ResponseEntity.ok(foundUser);
+    }
+	@GetMapping("/secure")
+    public String getSecurePage() {
+        return "secure";
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
+    }
+	
+	@PostMapping("/user/update")
 	public ResponseEntity<User> postUser(@RequestBody User user){
 		
 		User createdUser = dao.save(user);
 		return ResponseEntity.ok(createdUser);
 	}
 	
-	@DeleteMapping("/user")
-	public ResponseEntity<User> deleteUser(@PathVariable(value="user_id")Integer id){
-		User foundUser = dao.findById(id).orElse(null);
+	@DeleteMapping("/user/delete")
+	public ResponseEntity<User> deleteUser(@PathVariable(value="user_email")String user_email){
+		User foundUser = dao.findByUsername(user_email);
 		
 		if(foundUser==null) {
 			return ResponseEntity.notFound().header("User", 
-					"nothing found with that id").build();
+					"nothing found with that user_email").build();
 		}else {
 			dao.delete(foundUser);
 		}
 		return ResponseEntity.ok().build();
 	}
 	
-	@PutMapping("/user")
-	public ResponseEntity<User> putUser (@PathVariable Integer id,@RequestBody User user) {
-		User foundUser = dao.findById(id).orElse(null);
+	@PutMapping("/user/register")
+	public ResponseEntity<User> putUser (@PathVariable String user_email,@RequestBody User user) {
+		User foundUser = dao.findByUsername(user_email);
 		if (foundUser == null) {
 			return ResponseEntity.notFound().header("User",
 					"nothing found with that id").build();
