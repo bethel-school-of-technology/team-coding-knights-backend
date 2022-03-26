@@ -22,6 +22,7 @@ public class User {
 	private String user_email;
 	@Column(name = "user_password")
 	private String user_password;
+	
 			
 	
 	//Getters & Setters
@@ -66,6 +67,10 @@ public class User {
 	}
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
+	}
+	public void addAttribute(String string, boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
