@@ -1,4 +1,4 @@
-package com.codeknights.ProEstimates1.configuration;
+/*package com.codeknights.ProEstimates1.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,4 +48,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.permitAll();
 	}
-}
+}*/
