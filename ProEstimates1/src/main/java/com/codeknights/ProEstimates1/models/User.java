@@ -5,17 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
+	
 	@Id
-	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int user_id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Integer user_id;
 	@Column(name = "user_first_name")
 	private String user_first_name;
 	@Column(name = "user_last_name")
 	private String user_last_name;
 	@Column(name = "user_zip_code")
-	private int user_zip_code;
+	private Integer user_zip_code;
 	@Column(name = "user_phone_number")
 	private int user_phone_number;
 	@Column(name = "user_email")
@@ -26,10 +26,10 @@ public class User {
 			
 	
 	//Getters & Setters
-	public int getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
-	public void setUser_id(int user_id) {
+	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
 	public String getUser_first_name() {

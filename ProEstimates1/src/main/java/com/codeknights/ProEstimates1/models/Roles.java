@@ -1,4 +1,4 @@
-package com.codeknights.ProEstimates1.models;
+/*package com.codeknights.ProEstimates1.models;
 
 public class Roles {
 	private int user_id;
@@ -22,4 +22,4 @@ public class Roles {
 	public void setContractor(boolean isContractor) {
 		this.isContractor = isContractor;
 	}
-}
+}*/

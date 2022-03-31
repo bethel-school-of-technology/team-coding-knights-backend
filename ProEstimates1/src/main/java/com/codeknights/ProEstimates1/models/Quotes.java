@@ -1,4 +1,4 @@
-package com.codeknights.ProEstimates1.models;
+/*package com.codeknights.ProEstimates1.models;
 
 import javax.persistence.*;
 
@@ -65,4 +65,4 @@ public class Quotes {
 	}
 
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.codeknights.ProEstimates1.models;
+/*package com.codeknights.ProEstimates1.models;
 
 import java.sql.Date;
 import javax.persistence.*;
@@ -43,4 +43,4 @@ public class Materials {
 	
 
 
-}
+}*/
