@@ -1,28 +1,36 @@
 package com.codeknights.ProEstimates1.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.codeknights.ProEstimates1.models.User;
 import com.codeknights.ProEstimates1.repositories.UserRepository;
 import com.codeknights.ProEstimates1.services.MySQLUserDetailsService;
 
 @RestController
-@Controller
 public class UsersController {
 	
-	@Autowired
-	UserRepository dao;
+	public UserRepository dao;
 	
-	@Autowired
 	private MySQLUserDetailsService userService;
+	
+	@GetMapping(path="/all")
+	public List<User> getAllUsers() {
+		List<User> foundUsers = dao.findAll();
+		System.out.println("Works"); //Error isn't with SQL, it's with Spring
+		return foundUsers;
+	}
 	
 	@GetMapping("/user/")
     public ResponseEntity<User> getUser(@PathVariable(value="user_email") String user_email) {
