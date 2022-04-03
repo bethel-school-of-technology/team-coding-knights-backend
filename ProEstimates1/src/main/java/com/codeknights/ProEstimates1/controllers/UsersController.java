@@ -1,25 +1,91 @@
 package com.codeknights.ProEstimates1.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-//
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.DeleteMapping;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codeknights.ProEstimates1.repositories.UserRepository;
-//import com.codeknights.ProEstimates1.models.User;
-//import com.codeknights.ProEstimates1.services.MySQLUserDetailsService;
-//
+import com.codeknights.ProEstimates1.models.User;
+
+
 @RestController
+@RequestMapping({"/user"} )
 public class UsersController {
-//	
-	@Autowired
-	 UserRepository dao;
+	
+	@Value("${spring.datasource.url}")
+    private String url;
+
+    @Value("${spring.datasource.username}")
+    private String user_first_name;
+    
+    @Value("${spring.datasource.username}")
+    private String user_last_name;
+
+    @Value("${spring.datasource.password}")
+    private String user_password;
+    
+	
+	    @GetMapping()
+	    public List<User> getAllUsers(Model model) {
+	        List<User> users = new ArrayList<User>();
+	        Connection con;
+	        try {
+	            con = DriverManager.getConnection(url, user_first_name, user_password);
+	            Statement stmt = con.createStatement();
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+	            while (rs.next()) {
+	                // create a new User object
+	                User newUser = new User();
+	                // get the values from each column of the current row and add them to the new Album
+	                newUser.setUser_id(rs.getInt("user_id"));
+	                newUser.setUser_first_name(rs.getString("user_first_name"));
+	                newUser.setUser_last_name(rs.getString("user_last_name"));
+	                newUser.setUser_password(rs.getString("user_password"));
+	                newUser.setUser_email(rs.getString("user_email"));
+	                newUser.setUser_phone_number(rs.getInt("user_phone_number"));
+	                newUser.setUser_zip_code(rs.getInt("user_zip_code"));
+	                // add the new user to the users list
+	                users.add(newUser);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        model.addAttribute("users", users);
+	    
+	        return users;
+	    }
+////import org.springframework.beans.factory.annotation.Autowired;
+////
+////import org.springframework.http.ResponseEntity;
+////import org.springframework.web.bind.annotation.DeleteMapping;
+////import org.springframework.web.bind.annotation.GetMapping;
+////import org.springframework.web.bind.annotation.PathVariable;
+////import org.springframework.web.bind.annotation.PostMapping;
+////import org.springframework.web.bind.annotation.PutMapping;
+////import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RestController;
+//
+//import com.codeknights.ProEstimates1.repositories.UserRepository;
+////import com.codeknights.ProEstimates1.models.User;
+////import com.codeknights.ProEstimates1.services.MySQLUserDetailsService;
+////
+//@RestController
+//public class UsersController {
+////	
+//	@Autowired
+//	 UserRepository dao;
 //	
 ////	@Autowired
 ////	private MySQLUserDetailsService UserDetailsService;
@@ -33,12 +99,12 @@ public class UsersController {
 //        }
 //        return ResponseEntity.ok(foundUser);
 //    }
-//	@GetMapping("/secure")
-//    public String getSecurePage() {
-//        return "secure";
+//	@GetMapping("/quotes/user/{user_id}")
+//    public String getQuotesPage() {
+//        return "Quotes for User";
 //    }
 //
-//    @GetMapping("/login")
+//  @PostMapping("/login")
 //    public String getLoginPage() {
 //        return "login";
 //    }
@@ -55,7 +121,7 @@ public class UsersController {
 //			newUser.setUser_password(getLoginPage());
 //			newUser.setUser_phone_number(0);
 //			newUser.setUser_zip_code(0);
-////			userService.Save(newUser);
+//			userService.Save(newUser);
 //			return ResponseEntity.ok(createdUser);
 //		}else {
 //			user.addAttribute("exists", true);
@@ -77,7 +143,7 @@ public class UsersController {
 ////		
 ////	}
 //	
-//	@PutMapping("/user/update")
+//	@PutMapping("/user/{user_id}")
 //	public ResponseEntity<User> putUser (@PathVariable String user_email,@RequestBody User user) {
 //		User foundUser = dao.findByUsername(user_email);
 //		if (foundUser == null) {
