@@ -9,11 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +18,7 @@ import com.codeknights.ProEstimates1.models.User;
 
 
 @RestController
-@RequestMapping({"/user"} )
+@RequestMapping({"/user", "/register", "/user/{user_id}", "/quotes/user/{user_id}", "login"} )
 public class UsersController {
 	
 	@Value("${spring.datasource.url}")
@@ -66,6 +63,7 @@ public class UsersController {
 	    
 	        return users;
 	    }
+}
 ////import org.springframework.beans.factory.annotation.Autowired;
 ////
 ////import org.springframework.http.ResponseEntity;
@@ -185,4 +183,4 @@ public class UsersController {
 //		}
 //		return ResponseEntity.ok().build();
 //	}
-}
+
