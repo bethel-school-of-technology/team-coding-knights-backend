@@ -7,9 +7,6 @@ import javax.persistence.*;
 public class User {
 	
 	@Id
-
-	
-
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer user_id;
@@ -29,6 +26,7 @@ public class User {
 			
 	
 	//Getters & Setters
+	
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -75,5 +73,6 @@ public class User {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 }

@@ -42,10 +42,8 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- <dependency>
-=======
 		<dependency>
->>>>>>> 569483123596e96272f88d3345b4c944f8dec20a
-			<groupId>com.h2database</groupId>
+			</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
