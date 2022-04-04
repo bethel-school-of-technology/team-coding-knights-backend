@@ -1,4 +1,4 @@
-package com.codeknights.ProEstimates1.models;
+package com.beyondcoding.dataTest;
 
 import javax.persistence.*;
 
@@ -7,9 +7,6 @@ import javax.persistence.*;
 public class User {
 	
 	@Id
-
-	
-
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer user_id;
@@ -20,7 +17,7 @@ public class User {
 	@Column(name = "user_zip_code")
 	private Integer user_zip_code;
 	@Column(name = "user_phone_number")
-	private Integer user_phone_number;
+	private int user_phone_number;
 	@Column(name = "user_email")
 	private String user_email;
 	@Column(name = "user_password")
@@ -47,16 +44,16 @@ public class User {
 	public void setUser_last_name(String user_last_name) {
 		this.user_last_name = user_last_name;
 	}
-	public Integer getUser_zip_code() {
+	public int getUser_zip_code() {
 		return user_zip_code;
 	}
-	public void setUser_zip_code(Integer user_zip_code) {
+	public void setUser_zip_code(int user_zip_code) {
 		this.user_zip_code = user_zip_code;
 	}
-	public Integer getUser_phone_number() {
+	public int getUser_phone_number() {
 		return user_phone_number;
 	}
-	public void setUser_phone_number(Integer user_phone_number) {
+	public void setUser_phone_number(int user_phone_number) {
 		this.user_phone_number = user_phone_number;
 	}
 	public String getUser_email() {

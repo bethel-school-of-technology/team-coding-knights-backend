@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.4</version>
+		<version>2.6.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.beyondcoding.ProEstimates1</groupId>
-	<artifactId>ProEstimates1</artifactId>
+	<groupId>com.beyondcoding.dataTest</groupId>
+	<artifactId>dataTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ProEstimates1</name>
+	<name>dataTest</name>
 	<description>Final Project #3</description>
 	<properties>
 		<java.version>11</java.version>
@@ -19,56 +19,16 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
-		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- <dependency>
-=======
-		<dependency>
->>>>>>> 569483123596e96272f88d3345b4c944f8dec20a
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>dev.miku</groupId>
-			<artifactId>r2dbc-mysql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.r2dbc</groupId>
-			<artifactId>r2dbc-h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.r2dbc</groupId>
-			<artifactId>r2dbc-mssql</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -84,11 +44,6 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency> -->
 	</dependencies>
 
 	<build>
