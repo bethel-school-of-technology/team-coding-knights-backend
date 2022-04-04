@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,6 +70,29 @@ public class UsersController {
 	    
 	        return users;
 	    }
+	    
+	    @PostMapping("/register/")
+		public ResponseEntity<User> createUser(@RequestBody User user){
+			
+			User createdUser = dao.save(user);
+			if (createdUser == null) {
+				User newUser = new User();
+				newUser.setUser_email(user.getUser_email());
+				newUser.setUser_first_name(user.getUser_first_name());
+				newUser.setUser_last_name(user.getUser_last_name());
+				newUser.setUser_password(user.getUser_password());
+				newUser.setUser_phone_number(user.getUser_phone_number());
+				newUser.setUser_zip_code(user.getUser_zip_code());
+//				userService.Save(newUser);
+				return ResponseEntity.ok(createdUser);
+			}else {
+				user.addAttribute("exists", true);
+				return ResponseEntity.ok().header("User",
+						"was already created").build();
+			}
+			
+		}
+	    
 }
 
 //@RestController
