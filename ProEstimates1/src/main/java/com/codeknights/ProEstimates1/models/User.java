@@ -1,5 +1,7 @@
 package com.codeknights.ProEstimates1.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,6 @@ import javax.persistence.*;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer user_id;
 	@Column(name = "user_first_name")
@@ -22,11 +23,11 @@ public class User {
 	private String user_email;
 	@Column(name = "user_password")
 	private String user_password;
+	private String username = user_email;
 	
 			
 	
 	//Getters & Setters
-	
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -69,10 +70,9 @@ public class User {
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
 	}
-	public void addAttribute(String string, boolean b) {
+	public void addAttribute(String string, List<User> user) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 	
 }
