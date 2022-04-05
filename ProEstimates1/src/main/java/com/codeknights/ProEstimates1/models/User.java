@@ -2,6 +2,8 @@ package com.codeknights.ProEstimates1.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -17,9 +19,10 @@ public class User {
 	@Column(name = "user_zip_code")
 	private Integer user_zip_code;
 	@Column(name = "user_phone_number")
-	private Integer user_phone_number;
+	private Long user_phone_number;
 	@Column(name = "user_email")
 	private String user_email;
+	@JsonIgnore
 	@Column(name = "user_password")
 	private String user_password;
 	
@@ -51,10 +54,10 @@ public class User {
 	public void setUser_zip_code(Integer user_zip_code) {
 		this.user_zip_code = user_zip_code;
 	}
-	public Integer getUser_phone_number() {
+	public Long getUser_phone_number() {
 		return user_phone_number;
 	}
-	public void setUser_phone_number(Integer user_phone_number) {
+	public void setUser_phone_number(Long user_phone_number) {
 		this.user_phone_number = user_phone_number;
 	}
 	public String getUser_email() {
@@ -73,6 +76,4 @@ public class User {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 }

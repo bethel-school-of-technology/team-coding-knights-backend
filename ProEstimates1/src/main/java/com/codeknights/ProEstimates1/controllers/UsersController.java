@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -23,9 +24,9 @@ import com.codeknights.ProEstimates1.repositories.UserRepository;
 
 
 @RestController
-@RequestMapping({} )
 public class UsersController {
-	
+
+	@Autowired
 	UserRepository dao;
 	
 //	MySQLUserDetailsService UserDetailsService;
@@ -39,6 +40,13 @@ public class UsersController {
 
     @Value("${spring.datasource.password}")
     private String user_password;
+
+
+	@GetMapping("/contractors")
+	public List<User> getContractors(){
+		List<User> contractors = dao.findAllContractors();
+		return contractors;
+	}
     
 	
 	    @GetMapping("user/")
@@ -58,7 +66,7 @@ public class UsersController {
 	                newUser.setUser_last_name(rs.getString("user_last_name"));
 	                newUser.setUser_password(rs.getString("user_password"));
 	                newUser.setUser_email(rs.getString("user_email"));
-	                newUser.setUser_phone_number(rs.getInt("user_phone_number"));
+	                newUser.setUser_phone_number(rs.getLong("user_phone_number"));
 	                newUser.setUser_zip_code(rs.getInt("user_zip_code"));
 	                // add the new user to the users list
 	                users.add(newUser);
