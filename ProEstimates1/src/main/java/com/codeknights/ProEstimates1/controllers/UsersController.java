@@ -9,24 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.codeknights.ProEstimates1.models.User;
 import com.codeknights.ProEstimates1.repositories.UserRepository;
-//import com.codeknights.ProEstimates1.services.MySQLUserDetailsService;
+import com.codeknights.ProEstimates1.services.UserService;
+import com.codeknights.ProEstimates1.models.Quotes;
 
 
 @RestController
-@RequestMapping({} )
+@RequestMapping({})
 public class UsersController {
+	public UsersController(UserService userService) {
+		super();
+		this.userService = userService;
+		
+	}
+	private UserService userService;
 	
-	UserRepository dao;
+	private UserRepository dao;
 	
 //	MySQLUserDetailsService UserDetailsService;
 	
@@ -41,8 +44,8 @@ public class UsersController {
     private String user_password;
     
 	
-	    @GetMapping("user/")
-	    public List<User> getAllUsers(Model model) {
+	    @GetMapping("/user")
+	    public List<User> getAllUsers(User user) {
 	        List<User> users = new ArrayList<User>();
 	        Connection con;
 	        try {
@@ -66,33 +69,109 @@ public class UsersController {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	        model.addAttribute("users", users);
+	        user.addAttribute("users", users);
 	    
 	        return users;
 	    }
-	    
-	    @PostMapping("/register/")
-		public ResponseEntity<User> createUser(@RequestBody User user){
-			
-			User createdUser = dao.save(user);
-			if (createdUser == null) {
-				User newUser = new User();
-				newUser.setUser_email(user.getUser_email());
-				newUser.setUser_first_name(user.getUser_first_name());
-				newUser.setUser_last_name(user.getUser_last_name());
-				newUser.setUser_password(user.getUser_password());
-				newUser.setUser_phone_number(user.getUser_phone_number());
-				newUser.setUser_zip_code(user.getUser_zip_code());
-//				userService.Save(newUser);
-				return ResponseEntity.ok(createdUser);
-			}else {
-				user.addAttribute("exists", true);
-				return ResponseEntity.ok().header("User",
-						"was already created").build();
+	    @PostMapping("/register")
+		public ResponseEntity<User> saveUser(@RequestBody User user){
+			return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
 			}
+	    @DeleteMapping("/user/delete")
+		public ResponseEntity<User> deleteUser(@PathVariable(value="user_email")String user_email){
+			User foundUser = dao.findByUsername(user_email).orElse(null);
 			
+			if(foundUser==null) {
+				return ResponseEntity.notFound().header("User", 
+						"nothing found with that user_email").build();
+			}else {
+				dao.delete(foundUser);
+			}
+			return ResponseEntity.ok().build();
 		}
+	
+//	    @PostMapping("/register")
+//	    public ResponseEntity<User> saveUser(@RequestBody User user){
+//			
+//			User createdUser = userRepository.save(user);
+//			if (createdUser == null) {
+//				User newUser = new User();
+//				newUser.setUser_id(user.getUser_id());
+//				newUser.setUser_email(user.getUser_email());
+//				newUser.setUser_first_name(user.getUser_first_name());
+//				newUser.setUser_last_name(user.getUser_last_name());
+//				newUser.setUser_password(user.getUser_password());
+//				newUser.setUser_phone_number(user.getUser_phone_number());
+//				newUser.setUser_zip_code(user.getUser_zip_code());
+//////				userService.Save(newUser);
+//				return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
+//				
+//			}
+////			else {
+////				user.addAttribute("exists", true);
+////				return ResponseEntity.ok().header("User",
+////						"was already created").build();
+////			}
+//			
+//		}
+//	    @PutMapping("/user/{user_id}")
+//		public ResponseEntity<User> putUser (@PathVariable String user_email,@RequestBody User user) {
+//			User foundUser = userRepository.findByusername(user_email);
+//			if (foundUser == null) {
+//				return ResponseEntity.notFound().header("User",
+//						"nothing found with that user_email").build();
+//			}else {
+//				if (user.getUser_first_name() != null) {
+//					foundUser.setUser_first_name(user.getUser_first_name());
+//				}
+//				if (user.getUser_last_name() != null) {
+//					foundUser.setUser_last_name(user.getUser_last_name());
+//				}
+//				if (user.getUser_email() != null) {
+//					foundUser.setUser_email(user.getUser_email());
+//				}
+//				if (user.getUser_password() != null) {
+//					foundUser.setUser_password(user.getUser_password());
+//				}
+//				if (user.getUser_zip_code() != 0) {
+//					foundUser.setUser_zip_code(user.getUser_zip_code());
+//				}
+//				if (user.getUser_phone_number() != 0) {
+//					foundUser.setUser_phone_number(user.getUser_phone_number());
+//				}
+//				
+//				return ResponseEntity.ok(foundUser);
+//				}
+//		}
+	    @GetMapping("/quotes/user/{user_id}")
+	    public List<Quotes> getQuotes(Quotes quotes) {
+	        List<Quotes> quote = new ArrayList<Quotes>();
+	        Connection con;
+	        try {
+	            con = DriverManager.getConnection(url, user_first_name, user_password);
+	            Statement stmt = con.createStatement();
+	            ResultSet rs = stmt.executeQuery("SELECT * FROM quotes");
+	            while (rs.next()) {
+	                // create a new User object
+	                Quotes newQuote = new Quotes();
+	                // get the values from each column of the current row and add them to the new Album
+	                newQuote.setUser_id(rs.getInt("user_id"));
+	                newQuote.setQuote_id(rs.getInt("quote_id"));
+	                newQuote.setMaterial_name(rs.getString("material_name"));
+	                newQuote.setQuote_price(rs.getInt("quote_price"));
+	                newQuote.setQuote_measurement(rs.getInt("quote_measurement"));
+	                newQuote.setQuote_material(rs.getString("quote_material"));
+	                newQuote.setUser_comments(rs.getString("user_comments"));
+	                // add the new user to the users list
+	                quote.add(newQuote);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        quotes.addAttribute("quotes", quote);
 	    
+	        return quote;
+	    }
 }
 
 //@RestController

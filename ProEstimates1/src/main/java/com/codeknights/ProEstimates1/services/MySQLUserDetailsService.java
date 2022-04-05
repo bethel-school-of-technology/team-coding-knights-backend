@@ -23,7 +23,7 @@
 //
 //	@Override
 //	public UserDetails loadUserByUsername(String user_email) {
-//		User user = userRepository.findByuser_email(user_email);
+//		User user = userRepository.findByusername(user_email);
 //		if (user == null) {
 //			throw new UsernameNotFoundException(user_email);
 //		}
