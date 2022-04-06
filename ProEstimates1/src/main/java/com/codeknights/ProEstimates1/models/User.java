@@ -22,6 +22,7 @@ public class User {
 	private Long user_phone_number;
 	@Column(name = "user_email")
 	private String user_email;
+	// @see: https://stackoverflow.com/questions/23101260/ignore-fields-from-java-object-dynamically-while-sending-as-json-from-spring-mvc
 	@JsonIgnore
 	@Column(name = "user_password")
 	private String user_password;
