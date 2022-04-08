@@ -33,7 +33,7 @@
 //	private String password;
 //	
 //	
-//	@GetMapping("/quotes/")
+//	@GetMapping()
 //	public String getAllQuotes(Model model) {
 //		List<Quotes> quotes = new ArrayList<Quotes> ();
 //		

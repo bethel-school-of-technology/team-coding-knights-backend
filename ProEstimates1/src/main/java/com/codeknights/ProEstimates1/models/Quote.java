@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="quotes")
-public class Quotes {
+public class Quote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="quote_id")
@@ -68,7 +68,7 @@ public class Quotes {
 	public void setUser_comments(String user_comments) {
 		this.user_comments = user_comments;
 	}
-	public void addAttribute(String string, List<Quotes> quote) {
+	public void addAttribute(String string, List<Quote> quote) {
 		// TODO Auto-generated method stub
 		
 	}

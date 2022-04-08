@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -21,10 +23,21 @@ public class User {
 	private Integer  user_phone_number;
 	@Column(name = "user_email")
 	private String user_email;
+	private String username = user_email;
+	// @see: https://stackoverflow.com/questions/23101260/ignore-fields-from-java-object-dynamically-while-sending-as-json-from-spring-mvc
+	
 	@Column(name = "user_password")
 	private String user_password;
-	private String username = user_email;
-			
+//	had to change the class to public from protected so the controller could create a new User()
+	public User(){}
+    public User(int id, String first, String last,int zip, String email, String password) {
+		user_id = id;
+		user_first_name = first;
+		user_last_name = last;
+		user_zip_code = zip;
+		user_email = email;
+		user_password = password;
+	}		
 	
 	//Getters & Setters
 	
@@ -70,14 +83,17 @@ public class User {
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
 	}
-	public void addAttribute(String string, List<User> user) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	public User orElse(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void addAttribute(String string, List<User> users) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	
 	
 	
