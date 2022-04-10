@@ -12,6 +12,7 @@ import com.codeknights.ProEstimates1.repositories.UserRepository;
 import com.codeknights.ProEstimates1.services.MySQLUserDetailsService;
 import com.codeknights.ProEstimates1.util.LoginApiModel;
 import com.codeknights.ProEstimates1.util.LoginRegisterApiModel;
+import com.codeknights.ProEstimates1.util.RegisterApiModel;
 import com.codeknights.ProEstimates1.util.UpdateUserApiModel;
 import com.codeknights.ProEstimates1.models.Quote;
 
@@ -43,11 +44,14 @@ public class UsersController {
 	}
 	
 	    @PostMapping("/register")
-	    public LoginRegisterApiModel postRegister(@RequestBody User user) {
-	         this.UserDetailsService.Save(user);
+	    public LoginRegisterApiModel postRegister(@RequestBody RegisterApiModel user) {
+	        User new_user = user.toUserModel();
+	    	this.UserDetailsService.Save(new_user);
 	         LoginRegisterApiModel apiModel = new LoginRegisterApiModel();
-	         apiModel.setProfile(user);
-	         apiModel.setAccess_token("temporary"); 
+	         apiModel.setProfile(new_user);
+	         apiModel.setAccess_token("temporary");
+	         
+
 	        return apiModel;
 	    }
 	    @PostMapping("/login")

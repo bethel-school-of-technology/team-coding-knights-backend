@@ -5,6 +5,7 @@ import com.codeknights.ProEstimates1.models.User;
 public class LoginRegisterApiModel {
 private User profile;
 private String access_token;
+
 public User getProfile() {
 	return profile;
 }
