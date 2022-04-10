@@ -16,7 +16,7 @@ import com.codeknights.ProEstimates1.util.RegisterApiModel;
 import com.codeknights.ProEstimates1.util.UpdateUserApiModel;
 import com.codeknights.ProEstimates1.models.Quote;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping()
 public class UsersController {

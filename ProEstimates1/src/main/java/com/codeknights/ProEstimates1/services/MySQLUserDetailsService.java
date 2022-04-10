@@ -14,6 +14,11 @@ import com.codeknights.ProEstimates1.models.User;
 import com.codeknights.ProEstimates1.repositories.RolesRepository;
 import com.codeknights.ProEstimates1.repositories.UserRepository;
 
+import java.util.ArrayList; 
+import org.springframework.security.core.userdetails.UserDetails; 
+import org.springframework.security.core.userdetails.UserDetailsService; 
+import org.springframework.security.core.userdetails.UsernameNotFoundException; 
+import org.springframework.stereotype.Service; 
 
 @Service
 public class MySQLUserDetailsService implements UserDetailsService {
@@ -24,6 +29,7 @@ public class MySQLUserDetailsService implements UserDetailsService {
 	PasswordEncoder passwordEncoder;
 	@Autowired
 	RolesRepository rolesRepository;
+	
 
 	
 	public User GetUserFromUserName(String user_email) {
