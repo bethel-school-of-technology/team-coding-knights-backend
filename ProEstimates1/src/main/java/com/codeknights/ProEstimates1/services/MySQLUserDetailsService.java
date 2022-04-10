@@ -9,8 +9,9 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
+import com.codeknights.ProEstimates1.models.Roles;
 import com.codeknights.ProEstimates1.models.User;
+import com.codeknights.ProEstimates1.repositories.RolesRepository;
 import com.codeknights.ProEstimates1.repositories.UserRepository;
 
 
@@ -21,7 +22,8 @@ public class MySQLUserDetailsService implements UserDetailsService {
 	UserRepository userRepository;
 	@Autowired
 	PasswordEncoder passwordEncoder;
-
+	@Autowired
+	RolesRepository rolesRepository;
 
 	
 	public User GetUserFromUserName(String user_email) {
@@ -42,6 +44,8 @@ public class MySQLUserDetailsService implements UserDetailsService {
 	public User Save(User newUser) {
 		newUser.setUser_password(passwordEncoder.encode(newUser.getUser_password()));
 		User savedUser = userRepository.save(newUser);
+		Roles role = new Roles(newUser.getUser_id(), false, false);
+		rolesRepository.save(role);
 		return savedUser;
 }
 	public User Update(User newUser) {

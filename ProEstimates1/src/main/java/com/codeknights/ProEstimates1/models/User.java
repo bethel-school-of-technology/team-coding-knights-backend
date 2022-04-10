@@ -92,6 +92,9 @@ public class User {
 		// TODO Auto-generated method stub
 		
 	}
+	public Integer getUser_id() {
+		return user_id;
+	}
 	
 	
 	
