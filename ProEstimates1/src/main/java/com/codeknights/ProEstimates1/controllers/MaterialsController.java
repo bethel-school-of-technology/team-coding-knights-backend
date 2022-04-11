@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.codeknights.ProEstimates1.models.Materials;
 import com.codeknights.ProEstimates1.repositories.MaterialsRepository;
 
+@CrossOrigin
 @RestController
 public class MaterialsController {
 

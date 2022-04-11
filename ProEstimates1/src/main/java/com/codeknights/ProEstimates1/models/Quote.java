@@ -13,8 +13,7 @@ public class Quote {
 	private Integer quote_id;
 	@Column(name="user_id")
 	private Integer user_id;
-	@Column(name="material_name")
-	private String material_name;
+	
 	@Column(name="quote_measurement")
 	private Integer quote_measurement;
 	@Column(name="quote_price")
@@ -38,12 +37,7 @@ public class Quote {
 	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
-	public String getMaterial_name() {
-		return material_name;
-	}
-	public void setMaterial_name(String material_name) {
-		this.material_name = material_name;
-	}
+	
 	public Integer getQuote_measurement() {
 		return quote_measurement;
 	}

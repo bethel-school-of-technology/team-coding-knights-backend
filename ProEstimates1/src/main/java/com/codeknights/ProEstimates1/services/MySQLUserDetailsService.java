@@ -44,8 +44,8 @@ public class MySQLUserDetailsService implements UserDetailsService {
 	public User Save(User newUser) {
 		newUser.setUser_password(passwordEncoder.encode(newUser.getUser_password()));
 		User savedUser = userRepository.save(newUser);
-		Roles role = new Roles(newUser.getUser_id(), false, false);
-		rolesRepository.save(role);
+		// Roles role = new Roles(newUser.getUser_id(), false, false);
+		// rolesRepository.save(role);
 		return savedUser;
 }
 	public User Update(User newUser) {

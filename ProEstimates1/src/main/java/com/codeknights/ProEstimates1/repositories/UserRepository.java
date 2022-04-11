@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository <User, String>{
 	
 	@Query(value="SELECT user_id, user_email, user_first_name, user_last_name, user_phone_number, user_zip_code, user_password FROM pro_estimates.user INNER JOIN pro_estimates.roles USING(user_id) WHERE is_contractor = true",nativeQuery=true)
 	List<User> findAllContractors();
+	@Query(value="INSERT into pro_estimates.user(user_first_name, user_last_name, user_email, user_phone_number,user_zip_code, user_password) values(?1,?2,?3,?4,?5,?6);",nativeQuery=true)
+	void insertUser(String first_name, String last_name, String email, Long phone, Integer zip, String password);
 }
